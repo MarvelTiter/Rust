@@ -16,7 +16,7 @@ pub fn binary_search(nums: Vec<i32>, target: i32) -> i32 {
 }
 
 #[cfg(test)]
-mod tests {
+mod binary_search {
     use super::*;
     #[test]
     pub fn binary_search_test() {
