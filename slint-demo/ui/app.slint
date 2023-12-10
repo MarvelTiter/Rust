@@ -1,59 +1,35 @@
-import { Button , VerticalBox, HorizontalBox, TextEdit} from "std-widgets.slint";
+import { Button , VerticalBox, HorizontalBox, TextEdit, LineEdit} from "std-widgets.slint";
 export component App inherits Window {
-    width: 450px;
-    height: 150px;
+    width: 300px;
+    height: 180px;
     title: "QRCode";
-    in-out property <string> plate;
-    in-out property <string> pclass;
-    callback create-qr-code();
-    HorizontalBox {
-        spacing: 10px;
-        Rectangle {
-            VerticalBox {
-                alignment: center;
-                Rectangle {
-                    HorizontalBox {
-                        Text {
-                            font-size: 18px;
-                            text: "号牌号码:";
-                        }
-                        Rectangle {
-                            width: 150px;
-                            border-color: #ccc;
-                            border-width: 1px;
-                            TextInput {
-                                font-size: 18px;
-                                text: root.plate;
-                            }
-                        }
-                    }
-                }
-                Rectangle {
-                    HorizontalBox {
-                        Text {
-                            font-size: 18px;
-                            text: "号牌种类:";
-                        }
-                        Rectangle {
-                            width: 150px;
-                            border-color: #ccc;
-                            border-width: 1px;
-                            TextInput {
-                                font-size: 18px;
-                                text: root.pclass;
-                            }
-                        }
-                    }
-                }
+    in-out property <string> plate <=> p.text;
+    in-out property <string> pclass <=> c.text;
+    callback create-qr-code(string, string);
+    VerticalBox {
+        alignment: center;
+        HorizontalBox {
+            Text {
+                font-size: 18px;
+                text: "号牌号码:";
+            }
+            p:=LineEdit {
+                font-size: 18px;
             }
         }
-        Rectangle {
-            width: 100px;
-            Button {
-                text: "生成二维码";
-                clicked => {
-                    root.create-qr-code();
-                }
+        HorizontalBox {
+            Text {
+                font-size: 18px;
+                text: "号牌种类:";
+            }
+            c:=LineEdit {
+                font-size: 18px;
+            }
+        }
+        Button {
+            text: "生成二维码";
+            clicked => {
+                root.create-qr-code(root.plate, root.pclass);
             }
         }
     }
